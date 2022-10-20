@@ -40,5 +40,4 @@ public class MemberController {
         MEMBER_SERVICE.delete(memberDeleteDto.getId());
         return "OK";
     }
-
 }

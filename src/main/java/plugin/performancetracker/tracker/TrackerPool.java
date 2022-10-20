@@ -9,20 +9,26 @@ public class TrackerPool {
 
     private static boolean isInitialized = false;
 
-    private static void initialize(int poolSize) {
-        for (int i = 0; i < poolSize; i++) {
-            PerformanceTracker performanceTracker = new PerformanceTracker(i);
-            pool.add(performanceTracker);
-        }
-    }
-
     public static PerformanceTracker get() {
         if (!isInitialized) {
-            initialize(50);
+            initialize(null);
             isInitialized = true;
         }
 
         return pool.size() > 0 ? pool.poll() : null;
+    }
+
+    private static void initialize(Integer poolSize) {
+        if(poolSize == null || poolSize == 0) {
+            for (int i = 0; i < 50; i++) createTrackerToPool(i);
+        } else {
+            for (int i = 0; i < poolSize; i++) createTrackerToPool(i);
+        }
+    }
+
+    private static void createTrackerToPool(int i) {
+        PerformanceTracker performanceTracker = new PerformanceTracker(i);
+        pool.add(performanceTracker);
     }
 
     public static  void retrieve(PerformanceTracker tracker) {

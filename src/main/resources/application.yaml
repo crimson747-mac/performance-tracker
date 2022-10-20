@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  profiles:
+    active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test
@@ -18,6 +20,4 @@ spring:
         #format_sql: true
         #show_sql: true
 
-influx:
-  server: http://localhost:8086
-  database: performance
+tracker_pool_size: 50
